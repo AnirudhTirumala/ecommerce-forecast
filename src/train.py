@@ -16,4 +16,3 @@ def train_model(file_path):
         pickle.dump(model, f)
 
     return model
-

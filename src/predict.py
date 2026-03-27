@@ -12,4 +12,3 @@ def make_forecast(future_dates):
 
     predictions = model.predict(df_future)
     return predictions.tolist()
-

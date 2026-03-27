@@ -10,4 +10,3 @@ def preprocess_data(file_path):
     df["lag_1"] = df["Sales"].shift(1).bfill()
 
     return df
-
