@@ -22,3 +22,7 @@ def predict_sales(date: datetime) -> float:
     # Example: simple prediction using model (replace with actual logic)
     pred = model.get(day_of_week, 0.0)
     return pred
+# Last line of code
+return pred
+
+# <-- Make sure there's a blank line here (just press Enter)

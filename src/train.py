@@ -12,3 +12,7 @@ model = df.groupby("day_of_week")["Sales"].mean().to_dict()
 model_path = os.path.join("models", "model.pkl")
 with open(model_path, "wb") as f:
     pickle.dump(model, f)
+# Last line of code
+return pred
+
+# <-- Make sure there's a blank line here (just press Enter)

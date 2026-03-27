@@ -13,3 +13,7 @@ class TestPredict(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+# Last line of code
+return pred
+
+# <-- Make sure there's a blank line here (just press Enter)

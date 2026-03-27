@@ -14,3 +14,7 @@ df["lag_1"] = df["Sales"].shift(1).bfill()
 
 # Save processed data
 df.to_csv("data/processed.csv", index=False)
+# Last line of code
+return pred
+
+# <-- Make sure there's a blank line here (just press Enter)
