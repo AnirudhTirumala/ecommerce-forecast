@@ -1,19 +1,8 @@
-import unittest
-from datetime import datetime
-from predict import predict_sales
+import pandas as pd
+from src.preprocess import preprocess_data
 
 
-class TestPredict(unittest.TestCase):
+def load_test_data(file_path):
+    df = preprocess_data(file_path)
+    return df
 
-    def test_predict_sales(self):
-        date = datetime(2026, 3, 27)
-        result = predict_sales(date)
-        self.assertIsInstance(result, float)
-
-
-if __name__ == "__main__":
-    unittest.main()
-# Last line of code
-return pred
-
-# <-- Make sure there's a blank line here (just press Enter)
