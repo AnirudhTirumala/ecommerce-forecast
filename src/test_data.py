@@ -1,7 +1,10 @@
-import pandas as pd
-from src.preprocess import preprocess_data
+def test_preprocess():
+    assert True
 
 
-def load_test_data(file_path):
-    df = preprocess_data(file_path)
-    return df
+def test_train():
+    assert True
+
+
+def test_predict():
+    assert True

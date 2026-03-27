@@ -1,25 +1,15 @@
-from flask import Flask, request, jsonify
-from src.predict import make_forecast
-from datetime import datetime, timedelta
-
-app = Flask(__name__)
+from src.preprocess import preprocess_data
+from src.train import train_model
+from src.predict import predict_model
 
 
-@app.route("/predict", methods=["POST"])
-def predict():
-    data = request.get_json()
-    days = data.get("days", 7)
-    last_date = datetime.today()
-    future_dates = [last_date + timedelta(days=i) for i in range(1, days + 1)]
-    predictions = make_forecast(future_dates)
-
-    response = {
-        "predictions": predictions,
-        "day_of_week": [d.weekday() for d in future_dates]
-    }
-
-    return jsonify(response)
+def main():
+    data_file = "data/train.csv"
+    data = preprocess_data(data_file)
+    model = train_model(data)
+    predictions = predict_model(model, data)
+    print("Predictions:", predictions)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    main()
