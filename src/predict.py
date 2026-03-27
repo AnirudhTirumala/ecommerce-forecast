@@ -1,28 +1,14 @@
+import pandas as pd
 import pickle
-import os
-from datetime import datetime
-
-model_path = os.path.join(os.path.dirname(__file__), "../models/model.pkl")
-
-with open(model_path, "rb") as f:
-    model = pickle.load(f)
 
 
-def predict_sales(date: datetime) -> float:
-    """
-    Predict sales for a given date.
+def make_forecast(future_dates):
+    # Load trained model
+    with open("models/model.pkl", "rb") as f:
+        model = pickle.load(f)
 
-    Args:
-        date (datetime): The date to predict sales for.
+    df_future = pd.DataFrame({"date": future_dates})
+    df_future["day_of_week"] = df_future["date"].apply(lambda x: x.weekday())
 
-    Returns:
-        float: Predicted sales value.
-    """
-    day_of_week = date.weekday()
-    # Example: simple prediction using model (replace with actual logic)
-    pred = model.get(day_of_week, 0.0)
-    return pred
-# Last line of code
-return pred
-
-# <-- Make sure there's a blank line here (just press Enter)
+    predictions = model.predict(df_future)
+    return predictions.tolist()

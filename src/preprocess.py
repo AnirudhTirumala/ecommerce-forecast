@@ -1,20 +1,12 @@
 import pandas as pd
 
-# Load CSV
-df = pd.read_csv("data/train.csv")
 
-# Convert 'Order Date' to datetime
-df["Order Date"] = pd.to_datetime(df["Order Date"], errors="coerce")
+def preprocess_data(file_path):
+    df = pd.read_csv(file_path)
+    df["Order Date"] = pd.to_datetime(df["Order Date"])
+    df["day_of_week"] = df["Order Date"].dt.weekday  # 0=Mon, 6=Sun
 
-# Create day_of_week column
-df["day_of_week"] = df["Order Date"].dt.weekday
+    # Create lag feature
+    df["lag_1"] = df["Sales"].shift(1).bfill()
 
-# Create lag feature
-df["lag_1"] = df["Sales"].shift(1).bfill()
-
-# Save processed data
-df.to_csv("data/processed.csv", index=False)
-# Last line of code
-return pred
-
-# <-- Make sure there's a blank line here (just press Enter)
+    return df
