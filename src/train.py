@@ -1,20 +1,14 @@
 import pandas as pd
-from sklearn.linear_model import LinearRegression
 import pickle
+import os
 
-# Load processed data
-df = pd.read_csv("data/sales_processed.csv")
+data_path = "data/processed.csv"
+df = pd.read_csv(data_path)
 
-# Features and target
-X = df[['day_of_week', 'month', 'year', 'lag_1', 'lag_7']]
-y = df['Sales']
-
-# Train model
-model = LinearRegression()
-model.fit(X, y)
+# Simple model: sum sales per day of week
+model = df.groupby("day_of_week")["Sales"].mean().to_dict()
 
 # Save model
-with open("models/model.pkl", "wb") as f:
+model_path = os.path.join("models", "model.pkl")
+with open(model_path, "wb") as f:
     pickle.dump(model, f)
-
-print("Model trained and saved to models/model.pkl")

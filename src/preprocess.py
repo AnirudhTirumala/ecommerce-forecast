@@ -1,20 +1,16 @@
 import pandas as pd
 
-# Load sales data
-df = pd.read_csv("data/sales.csv")
+# Load CSV
+df = pd.read_csv("data/train.csv")
 
 # Convert 'Order Date' to datetime
-df['Order Date'] = pd.to_datetime(df['Order Date'])
+df["Order Date"] = pd.to_datetime(df["Order Date"], errors="coerce")
 
-# Feature engineering
-df['day_of_week'] = df['Order Date'].dt.weekday  # 0=Mon, 6=Sun
-df['month'] = df['Order Date'].dt.month
-df['year'] = df['Order Date'].dt.year
+# Create day_of_week column
+df["day_of_week"] = df["Order Date"].dt.weekday
 
-# Lag features
-df['lag_1'] = df['Sales'].shift(1).bfill()
-df['lag_7'] = df['Sales'].shift(7).bfill()
+# Create lag feature
+df["lag_1"] = df["Sales"].shift(1).bfill()
 
 # Save processed data
-df.to_csv("data/sales_processed.csv", index=False)
-print(df.head())
+df.to_csv("data/processed.csv", index=False)
