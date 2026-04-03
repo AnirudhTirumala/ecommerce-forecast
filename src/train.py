@@ -35,6 +35,5 @@ print(f"Model training complete. Test MSE: {mse}")
 # Ensure the models folder exists
 os.makedirs("models", exist_ok=True)
 
-# Save the trained model
 joblib.dump(model, "models/model.pkl")
 print("Model saved at models/model.pkl")
